@@ -7,16 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <title>Automata con JointJS</title>
-  <style>
-    #canvas {
-      width: 800px;
-      height: 600px;
-      border: 1px solid #ccc;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="canvas"></div>
+
+  <p>
+    Instrucciones de uso:<br>
+    Click izquierdo para crear un estado.<br>
+    Click izquierdo mas Shift para crear un estado inicial. <br>
+    Click izquierdo mas Ctrl para crear un estado final. <br>
+    Click izquierdo sobre un estado para crear una transicion hacia otro estado. <br>
+    Click derecho sobre una transicion para eliminarla. <br>
+    Click derecho sobre un estado para eliminarlo. <br>
+
+  </p>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>

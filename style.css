@@ -1,8 +1,12 @@
 /* Estilos CSS para los elementos del autómata */
 body{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
-#canvas{
-
+#canvas {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
 }
