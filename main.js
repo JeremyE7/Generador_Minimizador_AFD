@@ -1,8 +1,8 @@
 // Crear el lienzo para el autómata
 const canvas = new joint.dia.Paper({
   el: $('#canvas'),
-  width: 400,
-  height: 400,
+  width: 800,
+  height: 600,
   gridSize: 10,
   model: new joint.dia.Graph()
 });
@@ -40,21 +40,23 @@ function createLink(source, target, label) {
 }
 
 // Crear nodos iniciales
+const node1 = createNode(100, 100, 'A');
+const node2 = createNode(300, 150, 'B');
 
-
-const nodes = [];
+const nodes = [node1, node2];
 
 // Crear transiciones iniciales
-
-const links = [];
+const link1 = createLink(node1.id, node2.id, '0');
+const link2 = createLink(node2.id, node1.id, '1');
+const links = [link1, link2];
 // Añadir nodos y transiciones al canvas
+canvas.model.addCell([node1, node2, link1, link2]);
 
 // Evento de doble clic para agregar un nuevo nodo
 canvas.on('blank:pointerclick', function(evt, x, y) {
   const label = prompt('Ingrese el nombre del nuevo estado:');
   if (label) {
     const newNode = createNode(x, y, label);
-    nodes.push(label);
     canvas.model.addCell(newNode);
     nodes.push(newNode);
   }
@@ -67,7 +69,7 @@ canvas.on('element:pointerclick', function(cellView) {
   const label = prompt('Ingrese el valor de la transición:');
   if (label) {
     let targetNode = prompt('Ingrese el nombre del estado destino:')
-    targetNode = nodes.find(n =>  targetNode === n); 
+    targetNode = nodes.find(n =>  targetNode === n.attributes.attrs.text.text); 
     if(targetNode == null) return;
     
     // Buscar enlace existente entre los mismos nodos de origen y destino
@@ -82,7 +84,7 @@ canvas.on('element:pointerclick', function(cellView) {
   } else {
     // Crear un nuevo enlace
     const newLink = createLink(sourceNode.id, targetNode.id, label);
-    
+    links.push(newLink);
     canvas.model.addCell([targetNode, newLink]);
   }
 }
