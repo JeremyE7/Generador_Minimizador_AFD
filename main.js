@@ -24,7 +24,7 @@ function createNode(x, y, label) {
   });
 }
 
-// Función para crear una nueva transición
+// Función para crear una nueva transición 
 function createLink(source, target, label) {
   if(links.some(l => l.source == source && l.target == target && l.label == label)){
     alert("Ya existe una transición con esos valores");
@@ -37,7 +37,7 @@ function createLink(source, target, label) {
     connector: { name: 'smooth' },
     attrs: {
       line: { stroke: '#e67e22', strokeWidth: 2, targetMarker: { type: 'path', d: 'M 10 -5 0 0 10 5 Z' } },
-    }
+    },
   });
   
   link.appendLabel({
@@ -48,8 +48,13 @@ function createLink(source, target, label) {
   return link;
 }
 
-// Crear nodos iniciales
+// // Crear una nueva transición que se pueda arrastrar
+// const link = createLink('source', 'target', 'label');
+// const linkView = new joint.dia.LinkView({ model: link, interactive: { vertexAdd: false } });
 
+
+
+// Crear nodos iniciales
 
 const nodesView = [];
 const nodes = []
@@ -148,16 +153,18 @@ canvas.on('element:pointerclick', function(cellView, evt) {
   
   const node = cellView.model;
   if (evt.shiftKey) {
-    if(nodes.some(n => n.estado == "inicial")) {
-      alert("Ya existe un estado inicial");
-      return;
-    };
-    if(nodes[nodesView.indexOf(node)].estado == "inicial"){
+    
+    if(nodes[nodesView.indexOf(node)].estado == "inicial" || nodes[nodesView.indexOf(node)].estado == "inicial y final"){
       node.attr('body/stroke', '#000000');
       node.attr('body/strokeWidth', 2);
+      node.attr('body/fill', '#FFFFFF')
       nodes[nodesView.indexOf(node)].estado = "normal";
       return;
     }
+    if(nodes.some(n => n.estado == "inicial" || n.estado == "inicial y final")) {
+      alert("Ya existe un estado inicial");
+      return;
+    };
 
     const confirm = window.confirm(`¿Está seguro de volver el estado ${node.attributes.attrs.text.text} inicial?`);
     if (confirm) {
@@ -173,11 +180,24 @@ canvas.on('element:pointerclick', function(cellView, evt) {
 canvas.on('element:pointerclick', function(cellView, evt) {
   const node = cellView.model;
   if (evt.ctrlKey) {
-    if(nodes[nodesView.indexOf(node)].estado == "final"){
+    if(nodes[nodesView.indexOf(node)].estado == "final" || nodes[nodesView.indexOf(node)].estado == "inicial y final"){
       node.attr('body/stroke', '#000000');
       node.attr('body/strokeWidth', 2);
+      node.attr('body/fill', '#FFFFFF')
       nodes[nodesView.indexOf(node)].estado = "normal";
       return;
+    }
+    if(nodes[nodesView.indexOf(node)].estado == "inicial"){
+      const aux = window.confirm(`¿Está seguro de volver el estado ${node.attributes.attrs.text.text} final e inicial?`);
+      if (aux) {
+        node.attr('body/stroke', '#f2ff00');
+        node.attr('body/fill', '#3498db')
+        node.attr('body/strokeWidth', 7);
+        nodes[nodesView.indexOf(node)].estado = "inicial y final";
+        
+        return;
+      }
+
     }
     const confirm = window.confirm(`¿Está seguro de volver el estado ${node.attributes.attrs.text.text} final?`);
     if (confirm) {
@@ -187,3 +207,9 @@ canvas.on('element:pointerclick', function(cellView, evt) {
     }
   }
 });
+
+//Funcion para minimizar el automata
+
+function reduceAutomaton(nodes, links) {
+  
+}
