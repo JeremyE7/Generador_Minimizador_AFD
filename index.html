@@ -7,39 +7,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <title>Automata con JointJS</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 
 <body>
-  <main>
-    <div id="canvas"></div>
-    <div class="muestras">
-      <div class="inicial">Inicial</div>
-      <div class="final">Final</div>
-      <div class="inicial_final">Inicial y <br>Final</div>
-      <div class="normal">Normal</div>
+  <div id="Inicio"></div>
+  <button class="boton" id="btnI" onclick="iniciar()">Iniciar</button>
+  <div id="Botones" style="display: none">
+    <button class="boton">Minimizar</button>
+    <button class="boton" id="Ins" onclick="mostrar()">Instrucciones</button>
+    <button class="boton" onclick="regresar()">Salir</button>
+
+  </div>
+
+  <div id="Ayuda" style="display: none">
+    <p>Click izquierdo para crear un estado.</p>
+
+    <p>Click izquierdo mas Shift para crear un estado inicial.</p>
+
+    <p>Click izquierdo mas Ctrl para crear un estado final.</p>
+
+    <p>Click izquierdo sobre un estado para crear una transicion hacia otro estado.</p>
+
+    <p>Click derecho sobre una transicion para eliminarla.</p>
+
+    <p>Click derecho sobre un estado para eliminarlo.</p>
+  </div>
+
+  <div id="Container" style="display: none">
+    <div id="Titulo">
+      <h1>GENERADOR-MINIMIZADOR DE AUTOMATAS </h1>
     </div>
-  </main>
-  
 
-  <p>
-    Instrucciones de uso:<br>
-    Click izquierdo para crear un estado.<br>
-    Click izquierdo mas Shift para crear un estado inicial. <br>
-    Click izquierdo mas Ctrl para crear un estado final. <br>
-    Click izquierdo sobre un estado para crear una transicion hacia otro estado. <br>
-    Click derecho sobre una transicion para eliminarla. <br>
-    Click derecho sobre un estado para eliminarlo. <br>
+    <div id="canvas"></div> 
 
-  </p>
-
-  
-    <button id="reduceAutomath">asdsd</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.4.1/joint.min.js"></script>
     <script src="main.js"></script>
+  </div>
 </body>
 
 </html>
