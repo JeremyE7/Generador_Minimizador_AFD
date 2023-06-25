@@ -16,7 +16,7 @@ body{
 #canvas{
   background-color: rgba(184, 169, 169, 0.5); 
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 25%;
   border: 5px solid rgb(251, 250, 250);
   border: 3px solid;

@@ -2,8 +2,8 @@
 const canvas = new joint.dia.Paper({
   el: $('#canvas'),
   width: 800,
-  height: 400,
-  gridSize: 10,
+  height: 600,
+  gridSize: 1,
   model: new joint.dia.Graph()
 });
 
@@ -54,8 +54,8 @@ function createLink(source, target, label) {
   const link = new joint.shapes.standard.Link({
     source: { id: source },
     target: { id: target },
-    router: { name: 'manhattan' },
-    connectargetr: { name: 'smooth' },
+    router: { name: 'orthogonal' },
+    connector: { name: 'smooth' },
     attrs: {
       line: { stroke: '#e67e22', strokeWidth: 2, targetMarker: { type: 'path', d: 'M 10 -5 0 0 10 5 Z' } },
     },
@@ -70,17 +70,13 @@ function createLink(source, target, label) {
   return link;
 }
 
-// // Crear una nueva transición que se pueda arrastrar
-// const link = createLink('source', 'target', 'label');
-// const linkView = new joint.dia.LinkView({ model: link, interactive: { vertexAdd: false } });
-
 const nodesView = [];
 const nodes = [];
-q0n = {label: 'q0', estado: 'inicial y final'};
-q1n = {label: 'q1', estado: 'final'};
-q2n = {label: 'q2', estado: 'final'};
-q3n = {label: 'q3', estado: 'final'};
-q4n = {label: 'q4', estado: 'normal'};
+q0n = { label: 'q0', estado: 'inicial y final' };
+q1n = { label: 'q1', estado: 'final' };
+q2n = { label: 'q2', estado: 'final' };
+q3n = { label: 'q3', estado: 'final' };
+q4n = { label: 'q4', estado: 'normal' };
 
 q0 = createNode(100, 250, 'q0', 'inicial y final');
 q1 = createNode(300, 50, 'q1', 'final');
@@ -116,32 +112,32 @@ const link7 = createLink(q3.id, q1.id, '0');
 const link8 = createLink(q3.id, q4.id, '1');
 const link9 = createLink(q4.id, q4.id, '0');
 const link10 = createLink(q4.id, q4.id, '1');
-const link1s = {source: 'q0', target: 'q1', label: '0'};
-const link2s = {source: 'q0', target: 'q2', label: '1'};
-const link3s = {source: 'q1', target: 'q3', label: '1'};
-const link4s = {source: 'q1', target: 'q1', label: '0'};
-const link5s = {source: 'q2', target: 'q1', label: '0'};
-const link6s = {source: 'q2', target: 'q4', label: '1'};
-const link7s = {source: 'q3', target: 'q1', label: '0'};
-const link8s = {source: 'q3', target: 'q4', label: '1'};
-const link9s = {source: 'q4', target: 'q4', label: '0'};
-const link10s = {source: 'q4', target: 'q4', label: '1'};
+const link1s = { source: 'q0', target: 'q1', label: '0' };
+const link2s = { source: 'q0', target: 'q2', label: '1' };
+const link3s = { source: 'q1', target: 'q3', label: '1' };
+const link4s = { source: 'q1', target: 'q1', label: '0' };
+const link5s = { source: 'q2', target: 'q1', label: '0' };
+const link6s = { source: 'q2', target: 'q4', label: '1' };
+const link7s = { source: 'q3', target: 'q1', label: '0' };
+const link8s = { source: 'q3', target: 'q4', label: '1' };
+const link9s = { source: 'q4', target: 'q4', label: '0' };
+const link10s = { source: 'q4', target: 'q4', label: '1' };
 
 links.push(link1s, link2s, link3s, link4s, link5s, link6s, link7s, link8s, link9s, link10s);
 linksView.push(link1, link2, link3, link4, link5, link6, link7, link8, link9, link10);
-canvas.model.addCell([q1,link1]);
-canvas.model.addCell([q2,link2]);
-canvas.model.addCell([q3,link3]);
-canvas.model.addCell([q1,link4]);
-canvas.model.addCell([q1,link5]);
-canvas.model.addCell([q4,link6]);
-canvas.model.addCell([q1,link7]);
-canvas.model.addCell([q4,link8]);
-canvas.model.addCell([q4,link9]);
-canvas.model.addCell([q4,link10]);
+canvas.model.addCell([q1, link1]);
+canvas.model.addCell([q2, link2]);
+canvas.model.addCell([q3, link3]);
+canvas.model.addCell([q1, link4]);
+canvas.model.addCell([q1, link5]);
+canvas.model.addCell([q4, link6]);
+canvas.model.addCell([q1, link7]);
+canvas.model.addCell([q4, link8]);
+canvas.model.addCell([q4, link9]);
+canvas.model.addCell([q4, link10]);
 
 // Crear alfabetarget inicial
-const alphabet = ["0","1"];
+const alphabet = ["0", "1"];
 
 // Eventarget de clic para agregar un nuevo nodo
 canvas.on('blank:pointerclick', function (evt, x, y) {
@@ -157,7 +153,7 @@ canvas.on('blank:pointerclick', function (evt, x, y) {
 });
 
 
-// Eventarget de doble clic en un nodo para agregar una nueva transición
+// Eventarget de clic en un nodo para agregar una nueva transición
 canvas.on('element:pointerclick', function (cellView, evt) {
   if (evt.shiftKey || evt.ctrlKey) return;
   const sourceNode = cellView.model;
@@ -176,6 +172,12 @@ canvas.on('element:pointerclick', function (cellView, evt) {
       alert("No existe un estado con ese nombre");
       return;
     };
+
+    //Comprobar que ya no exista una transición con los mismos valores hacia el mismo estado
+    if (links.some(l => l.source == sourceNode.attributes.attrs.text.text && l.target == targetNode.attributes.attrs.text.text && l.label == label)) {
+      alert("Ya existe una transición con esos valores");
+      return;
+    }
 
     // Buscar enlace existente entre los mismos nodos de origen y destino
     const existingLink = canvas.model.getConnectedLinks(sourceNode, { outbound: true })
@@ -223,7 +225,13 @@ canvas.on('element:contextmenu', function (cellView, evt) {
     canvas.model.removeCells([node]);
     nodes.splice(nodesView.indexOf(node), 1);
     nodesView.splice(nodesView.indexOf(node), 1);
-
+    //Eliminar transiciones del nodo
+    const linksToDelete = canvas.model.getConnectedLinks(node);
+    linksToDelete.forEach(link => {
+      links.splice(linksView.indexOf(link), 1);
+      linksView.splice(linksView.indexOf(link), 1);
+    }
+    );
   }
   console.log(nodes);
 });
@@ -288,17 +296,125 @@ canvas.on('element:pointerclick', function (cellView, evt) {
   }
 });
 
-function iniciar(){
+//Función para minimizar el autómata
+function minimizar() {
+  //Separar en estados finales y no finales
+  const finales = nodes.filter(n => n.estado === "final" || n.estado === "inicial y final");
+  const noFinales = nodes.filter(n => n.estado === "normal" || n.estado === "inicial");
+
+
+  const transitions = {};
+
+  for (let i = 0; i < links.length; i++) {
+    const link = links[i];
+    const { source, target, label } = link;
+
+    if (!transitions[source]) {
+      transitions[source] = {};
+    }
+
+    transitions[source][label] = target;
+  }
+  //Obtener nodo inicial
+  
+  const startState = nodes.find(n => n.estado === "inicial" || n.estado === "inicial y final").label;
+  console.log(transitions);
+
+  console.log(minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState , finales.map(n => n.label)));
+}
+
+function minimizeDFA(states, alphabet, transitions, startState, finalStates) {
+  // Create initial table of equivalent states
+  console.log(states, alphabet, transitions, startState, finalStates);
+  let table = [];
+  for (let i = 0; i < states.length; i++) {
+    table[i] = [];
+    for (let j = 0; j < states.length; j++) {
+      table[i][j] = (finalStates.includes(states[i]) != finalStates.includes(states[j]));
+    }
+  }
+
+  // Mark distinguishable pairs of states
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (let i = 0; i < states.length; i++) {
+      for (let j = i + 1; j < states.length; j++) {
+        if (!table[i][j]) {
+          for (let k = 0; k < alphabet.length; k++) {
+            let p = states.indexOf(transitions[states[i]][alphabet[k]]);
+            let q = states.indexOf(transitions[states[j]][alphabet[k]]);
+            if (table[p][q]) {
+              table[i][j] = true;
+              changed = true;
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Group equivalent states
+  let groups = [];
+  for (let i = 0; i < states.length; i++) {
+    let group = -1;
+    for (let j = 0; j < groups.length; j++) {
+      if (!table[i][groups[j][0]]) {
+        group = j;
+        break;
+      }
+    }
+    if (group == -1) {
+      group = groups.length;
+      groups.push([]);
+    }
+    groups[group].push(states[i]);
+  }
+
+  // Create new transitions and final states
+  let newStates = [];
+  let newTransitions = {};
+  console.log(startState);
+  let newStartState = groups[groups.findIndex(group => group.includes(startState))][0];
+  let newFinalStates = [];
+  for (let i = 0; i < groups.length; i++) {
+    let state = groups[i][0];
+    newStates.push(state);
+    newTransitions[state] = {};
+    for (let j = 0; j < alphabet.length; j++) {
+      let nextState = transitions[state][alphabet[j]];
+      let group = groups.findIndex(group => group.includes(nextState));
+      newTransitions[state][alphabet[j]] = groups[group][states.indexOf(nextState)];
+    }
+    if (groups[i].includes(finalStates[0])) {
+      newFinalStates.push(state);
+    }
+  }
+
+  return {
+    states: newStates,
+    alphabet: alphabet,
+    transitions: newTransitions,
+    startState: newStartState,
+    finalStates: newFinalStates
+  };
+}
+
+
+
+
+function iniciar() {
   document.getElementById("btnI").style.display = 'none';
   document.getElementById("Botones").style.display = '';
   document.getElementById("Botones").style.display = '';
   document.getElementById("Container").style.display = '';
   document.getElementById("Inicio").style.display = 'none';
- 
+
 }
-function mostrar(){
+function mostrar() {
   var divAyuda = document.getElementById("Ayuda");
-      
+
   if (divAyuda.style.display === 'none') {
     divAyuda.style.display = ''; // Muestra el div si está oculto
   } else {
@@ -306,7 +422,7 @@ function mostrar(){
   }
 }
 
-function regresar(){
+function regresar() {
   location.reload();
 }
 
@@ -319,7 +435,6 @@ function reproducirAudio() {
 
 // Llama a la función para reproducir el audio cuando la página se haya cargado completamente
 window.addEventListener('load', reproducirAudio);
-
 
 
 
