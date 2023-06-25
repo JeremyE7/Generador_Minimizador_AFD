@@ -72,28 +72,28 @@ function createLink(source, target, label) {
 
 const nodesView = [];
 const nodes = [];
-q0n = { label: 'q0', estado: 'inicial y final' };
-q1n = { label: 'q1', estado: 'final' };
-q2n = { label: 'q2', estado: 'final' };
-q3n = { label: 'q3', estado: 'final' };
-q4n = { label: 'q4', estado: 'normal' };
+// q0n = { label: 'q0', estado: 'inicial y final' };
+// q1n = { label: 'q1', estado: 'final' };
+// q2n = { label: 'q2', estado: 'final' };
+// q3n = { label: 'q3', estado: 'final' };
+// q4n = { label: 'q4', estado: 'normal' };
 
-q0 = createNode(100, 250, 'q0', 'inicial y final');
-q1 = createNode(300, 50, 'q1', 'final');
-q2 = createNode(300, 300, 'q2', 'final');
-q3 = createNode(500, 50, 'q3', 'final');
-q4 = createNode(500, 300, 'q4', 'normal');
-nodes.push(q0n);
-nodes.push(q1n);
-nodes.push(q2n);
-nodes.push(q3n);
-nodes.push(q4n);
-nodesView.push(q0);
-nodesView.push(q1);
-nodesView.push(q2);
-nodesView.push(q3);
-nodesView.push(q4);
-canvas.model.addCell([q0, q1, q2, q3, q4]);
+// q0 = createNode(100, 250, 'q0', 'inicial y final');
+// q1 = createNode(300, 50, 'q1', 'final');
+// q2 = createNode(300, 300, 'q2', 'final');
+// q3 = createNode(500, 50, 'q3', 'final');
+// q4 = createNode(500, 300, 'q4', 'normal');
+// nodes.push(q0n);
+// nodes.push(q1n);
+// nodes.push(q2n);
+// nodes.push(q3n);
+// nodes.push(q4n);
+// nodesView.push(q0);
+// nodesView.push(q1);
+// nodesView.push(q2);
+// nodesView.push(q3);
+// nodesView.push(q4);
+// canvas.model.addCell([q0, q1, q2, q3, q4]);
 // Crear nodos iniciales
 
 
@@ -101,40 +101,40 @@ const linksView = [];
 const links = []
 
 
-// Crear transiciones iniciales
-const link1 = createLink(q0.id, q1.id, '0');
-const link2 = createLink(q0.id, q2.id, '1');
-const link3 = createLink(q1.id, q3.id, '1');
-const link4 = createLink(q1.id, q1.id, '0');
-const link5 = createLink(q2.id, q1.id, '0');
-const link6 = createLink(q2.id, q4.id, '1');
-const link7 = createLink(q3.id, q1.id, '0');
-const link8 = createLink(q3.id, q4.id, '1');
-const link9 = createLink(q4.id, q4.id, '0');
-const link10 = createLink(q4.id, q4.id, '1');
-const link1s = { source: 'q0', target: 'q1', label: '0' };
-const link2s = { source: 'q0', target: 'q2', label: '1' };
-const link3s = { source: 'q1', target: 'q3', label: '1' };
-const link4s = { source: 'q1', target: 'q1', label: '0' };
-const link5s = { source: 'q2', target: 'q1', label: '0' };
-const link6s = { source: 'q2', target: 'q4', label: '1' };
-const link7s = { source: 'q3', target: 'q1', label: '0' };
-const link8s = { source: 'q3', target: 'q4', label: '1' };
-const link9s = { source: 'q4', target: 'q4', label: '0' };
-const link10s = { source: 'q4', target: 'q4', label: '1' };
+// // Crear transiciones iniciales
+// const link1 = createLink(q0.id, q1.id, '0');
+// const link2 = createLink(q0.id, q2.id, '1');
+// const link3 = createLink(q1.id, q3.id, '1');
+// const link4 = createLink(q1.id, q1.id, '0');
+// const link5 = createLink(q2.id, q1.id, '0');
+// const link6 = createLink(q2.id, q4.id, '1');
+// const link7 = createLink(q3.id, q1.id, '0');
+// const link8 = createLink(q3.id, q4.id, '1');
+// const link9 = createLink(q4.id, q4.id, '0');
+// const link10 = createLink(q4.id, q4.id, '1');
+// const link1s = { source: 'q0', target: 'q1', label: '0' };
+// const link2s = { source: 'q0', target: 'q2', label: '1' };
+// const link3s = { source: 'q1', target: 'q3', label: '1' };
+// const link4s = { source: 'q1', target: 'q1', label: '0' };
+// const link5s = { source: 'q2', target: 'q1', label: '0' };
+// const link6s = { source: 'q2', target: 'q4', label: '1' };
+// const link7s = { source: 'q3', target: 'q1', label: '0' };
+// const link8s = { source: 'q3', target: 'q4', label: '1' };
+// const link9s = { source: 'q4', target: 'q4', label: '0' };
+// const link10s = { source: 'q4', target: 'q4', label: '1' };
 
-links.push(link1s, link2s, link3s, link4s, link5s, link6s, link7s, link8s, link9s, link10s);
-linksView.push(link1, link2, link3, link4, link5, link6, link7, link8, link9, link10);
-canvas.model.addCell([q1, link1]);
-canvas.model.addCell([q2, link2]);
-canvas.model.addCell([q3, link3]);
-canvas.model.addCell([q1, link4]);
-canvas.model.addCell([q1, link5]);
-canvas.model.addCell([q4, link6]);
-canvas.model.addCell([q1, link7]);
-canvas.model.addCell([q4, link8]);
-canvas.model.addCell([q4, link9]);
-canvas.model.addCell([q4, link10]);
+// links.push(link1s, link2s, link3s, link4s, link5s, link6s, link7s, link8s, link9s, link10s);
+// linksView.push(link1, link2, link3, link4, link5, link6, link7, link8, link9, link10);
+// canvas.model.addCell([q1, link1]);
+// canvas.model.addCell([q2, link2]);
+// canvas.model.addCell([q3, link3]);
+// canvas.model.addCell([q1, link4]);
+// canvas.model.addCell([q1, link5]);
+// canvas.model.addCell([q4, link6]);
+// canvas.model.addCell([q1, link7]);
+// canvas.model.addCell([q4, link8]);
+// canvas.model.addCell([q4, link9]);
+// canvas.model.addCell([q4, link10]);
 
 // Crear alfabetarget inicial
 const alphabet = ["0", "1"];
