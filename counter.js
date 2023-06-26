@@ -155,5 +155,6 @@ let links = [
 let alphabet = ['0', '1'];
 
 let minimizedAutomaton = minimizarAFD(nodes, links, alphabet);
+console.log("Automata minimizado");
 console.log(minimizedAutomaton);
 

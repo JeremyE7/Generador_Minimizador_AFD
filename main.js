@@ -1,3 +1,4 @@
+
 // Crear el lienzo para el autómata
 const canvas = new joint.dia.Paper({
   el: $('#canvas'),
@@ -72,69 +73,67 @@ function createLink(source, target, label) {
 
 const nodesView = [];
 const nodes = [];
-// q0n = { label: 'q0', estado: 'inicial y final' };
-// q1n = { label: 'q1', estado: 'final' };
-// q2n = { label: 'q2', estado: 'final' };
-// q3n = { label: 'q3', estado: 'final' };
-// q4n = { label: 'q4', estado: 'normal' };
+q0n = { label: 'q0', estado: 'inicial y final' };
+q1n = { label: 'q1', estado: 'final' };
+q2n = { label: 'q2', estado: 'final' };
+q3n = { label: 'q3', estado: 'final' };
+q4n = { label: 'q4', estado: 'normal' };
 
-// q0 = createNode(100, 250, 'q0', 'inicial y final');
-// q1 = createNode(300, 50, 'q1', 'final');
-// q2 = createNode(300, 300, 'q2', 'final');
-// q3 = createNode(500, 50, 'q3', 'final');
-// q4 = createNode(500, 300, 'q4', 'normal');
-// nodes.push(q0n);
-// nodes.push(q1n);
-// nodes.push(q2n);
-// nodes.push(q3n);
-// nodes.push(q4n);
-// nodesView.push(q0);
-// nodesView.push(q1);
-// nodesView.push(q2);
-// nodesView.push(q3);
-// nodesView.push(q4);
-// canvas.model.addCell([q0, q1, q2, q3, q4]);
+q0 = createNode(100, 250, 'q0', 'inicial y final');
+q1 = createNode(300, 50, 'q1', 'final');
+q2 = createNode(300, 300, 'q2', 'final');
+q3 = createNode(500, 50, 'q3', 'final');
+q4 = createNode(500, 300, 'q4', 'normal');
+nodes.push(q0n);
+nodes.push(q1n);
+nodes.push(q2n);
+nodes.push(q3n);
+nodes.push(q4n);
+nodesView.push(q0);
+nodesView.push(q1);
+nodesView.push(q2);
+nodesView.push(q3);
+nodesView.push(q4);
+canvas.model.addCell([q0, q1, q2, q3, q4]);
 // Crear nodos iniciales
 
 
 const linksView = [];
 const links = []
 
-
-// // Crear transiciones iniciales
-// const link1 = createLink(q0.id, q1.id, '0');
-// const link2 = createLink(q0.id, q2.id, '1');
-// const link3 = createLink(q1.id, q3.id, '1');
-// const link4 = createLink(q1.id, q1.id, '0');
-// const link5 = createLink(q2.id, q1.id, '0');
-// const link6 = createLink(q2.id, q4.id, '1');
-// const link7 = createLink(q3.id, q1.id, '0');
-// const link8 = createLink(q3.id, q4.id, '1');
-// const link9 = createLink(q4.id, q4.id, '0');
-// const link10 = createLink(q4.id, q4.id, '1');
-// const link1s = { source: 'q0', target: 'q1', label: '0' };
-// const link2s = { source: 'q0', target: 'q2', label: '1' };
-// const link3s = { source: 'q1', target: 'q3', label: '1' };
-// const link4s = { source: 'q1', target: 'q1', label: '0' };
-// const link5s = { source: 'q2', target: 'q1', label: '0' };
-// const link6s = { source: 'q2', target: 'q4', label: '1' };
-// const link7s = { source: 'q3', target: 'q1', label: '0' };
-// const link8s = { source: 'q3', target: 'q4', label: '1' };
-// const link9s = { source: 'q4', target: 'q4', label: '0' };
-// const link10s = { source: 'q4', target: 'q4', label: '1' };
-
-// links.push(link1s, link2s, link3s, link4s, link5s, link6s, link7s, link8s, link9s, link10s);
-// linksView.push(link1, link2, link3, link4, link5, link6, link7, link8, link9, link10);
-// canvas.model.addCell([q1, link1]);
-// canvas.model.addCell([q2, link2]);
-// canvas.model.addCell([q3, link3]);
-// canvas.model.addCell([q1, link4]);
-// canvas.model.addCell([q1, link5]);
-// canvas.model.addCell([q4, link6]);
-// canvas.model.addCell([q1, link7]);
-// canvas.model.addCell([q4, link8]);
-// canvas.model.addCell([q4, link9]);
-// canvas.model.addCell([q4, link10]);
+// Crear transiciones iniciales
+const link1 = createLink(q0.id, q1.id, '0');
+const link2 = createLink(q0.id, q2.id, '1');
+const link3 = createLink(q1.id, q3.id, '1');
+const link4 = createLink(q1.id, q1.id, '0');
+const link5 = createLink(q2.id, q1.id, '0');
+const link6 = createLink(q2.id, q4.id, '1');
+const link7 = createLink(q3.id, q1.id, '0');
+const link8 = createLink(q3.id, q4.id, '1');
+const link9 = createLink(q4.id, q4.id, '0');
+const link10 = createLink(q4.id, q4.id, '1');
+const link1s = { source: 'q0', target: 'q1', label: '0' };
+const link2s = { source: 'q0', target: 'q2', label: '1' };
+const link3s = { source: 'q1', target: 'q3', label: '1' };
+const link4s = { source: 'q1', target: 'q1', label: '0' };
+const link5s = { source: 'q2', target: 'q1', label: '0' };
+const link6s = { source: 'q2', target: 'q4', label: '1' };
+const link7s = { source: 'q3', target: 'q1', label: '0' };
+const link8s = { source: 'q3', target: 'q4', label: '1' };
+const link9s = { source: 'q4', target: 'q4', label: '0' };
+const link10s = { source: 'q4', target: 'q4', label: '1' };
+links.push(link1s, link2s, link3s, link4s, link5s, link6s, link7s, link8s, link9s, link10s);
+linksView.push(link1, link2, link3, link4, link5, link6, link7, link8, link9, link10);
+canvas.model.addCell([q1, link1]);
+canvas.model.addCell([q2, link2]);
+canvas.model.addCell([q3, link3]);
+canvas.model.addCell([q1, link4]);
+canvas.model.addCell([q1, link5]);
+canvas.model.addCell([q4, link6]);
+canvas.model.addCell([q1, link7]);
+canvas.model.addCell([q4, link8]);
+canvas.model.addCell([q4, link9]);
+canvas.model.addCell([q4, link10]);
 
 // Crear alfabetarget inicial
 const alphabet = ["0", "1"];
@@ -217,14 +216,11 @@ canvas.on('link:contextmenu', function (cellView, evt) {
   console.log(links);
 });
 
-//Eventarget de doble clic derecho en un nodo para eliminarlo
+//Eventarget de clic derecho en un nodo para eliminarlo
 canvas.on('element:contextmenu', function (cellView, evt) {
   const node = cellView.model;
   const confirm = window.confirm(`¿Está seguro de eliminar el estado ${node.attributes.attrs.text.text}?`);
   if (confirm) {
-    canvas.model.removeCells([node]);
-    nodes.splice(nodesView.indexOf(node), 1);
-    nodesView.splice(nodesView.indexOf(node), 1);
     //Eliminar transiciones del nodo
     const linksToDelete = canvas.model.getConnectedLinks(node);
     linksToDelete.forEach(link => {
@@ -232,6 +228,10 @@ canvas.on('element:contextmenu', function (cellView, evt) {
       linksView.splice(linksView.indexOf(link), 1);
     }
     );
+    canvas.model.removeCells([node]);
+    nodes.splice(nodesView.indexOf(node), 1);
+    nodesView.splice(nodesView.indexOf(node), 1);
+    
   }
   console.log(nodes);
 });
@@ -298,111 +298,52 @@ canvas.on('element:pointerclick', function (cellView, evt) {
 
 //Función para minimizar el autómata
 function minimizar() {
+  console.log("sad");
   //Separar en estados finales y no finales
   const finales = nodes.filter(n => n.estado === "final" || n.estado === "inicial y final");
-  const noFinales = nodes.filter(n => n.estado === "normal" || n.estado === "inicial");
-
-
   const transitions = {};
 
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
     const { source, target, label } = link;
-
     if (!transitions[source]) {
       transitions[source] = {};
     }
-
     transitions[source][label] = target;
   }
   //Obtener nodo inicial
-  
   const startState = nodes.find(n => n.estado === "inicial" || n.estado === "inicial y final").label;
-  console.log(transitions);
-
-  console.log(minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState , finales.map(n => n.label)));
+  automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState , finales.map(n => n.label));
+  console.log("a continuacion automata y enviandolo a python");
+  console.log(JSON.stringify(automata));
+  fetch('http://127.0.0.1:5000/minimize', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(automata)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log("A continuación, los datos:");
+    console.log(data);
+    automata = data;
+    limpiarYDibujarAutomata(automata);
+  })
+  .catch(error => {
+    console.error('Error en la solicitud:', error);
+  });
 }
 
 function minimizeDFA(states, alphabet, transitions, startState, finalStates) {
-  // Create initial table of equivalent states
-  console.log(states, alphabet, transitions, startState, finalStates);
-  let table = [];
-  for (let i = 0; i < states.length; i++) {
-    table[i] = [];
-    for (let j = 0; j < states.length; j++) {
-      table[i][j] = (finalStates.includes(states[i]) != finalStates.includes(states[j]));
-    }
-  }
-
-  // Mark distinguishable pairs of states
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (let i = 0; i < states.length; i++) {
-      for (let j = i + 1; j < states.length; j++) {
-        if (!table[i][j]) {
-          for (let k = 0; k < alphabet.length; k++) {
-            let p = states.indexOf(transitions[states[i]][alphabet[k]]);
-            let q = states.indexOf(transitions[states[j]][alphabet[k]]);
-            if (table[p][q]) {
-              table[i][j] = true;
-              changed = true;
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Group equivalent states
-  let groups = [];
-  for (let i = 0; i < states.length; i++) {
-    let group = -1;
-    for (let j = 0; j < groups.length; j++) {
-      if (!table[i][groups[j][0]]) {
-        group = j;
-        break;
-      }
-    }
-    if (group == -1) {
-      group = groups.length;
-      groups.push([]);
-    }
-    groups[group].push(states[i]);
-  }
-
-  // Create new transitions and final states
-  let newStates = [];
-  let newTransitions = {};
-  console.log(startState);
-  let newStartState = groups[groups.findIndex(group => group.includes(startState))][0];
-  let newFinalStates = [];
-  for (let i = 0; i < groups.length; i++) {
-    let state = groups[i][0];
-    newStates.push(state);
-    newTransitions[state] = {};
-    for (let j = 0; j < alphabet.length; j++) {
-      let nextState = transitions[state][alphabet[j]];
-      let group = groups.findIndex(group => group.includes(nextState));
-      newTransitions[state][alphabet[j]] = groups[group][states.indexOf(nextState)];
-    }
-    if (groups[i].includes(finalStates[0])) {
-      newFinalStates.push(state);
-    }
-  }
-
   return {
-    states: newStates,
-    alphabet: alphabet,
-    transitions: newTransitions,
-    startState: newStartState,
-    finalStates: newFinalStates
+    states,
+    alphabet,
+    transitions,
+    startState,
+    finalStates
   };
 }
-
-
-
 
 function iniciar() {
   document.getElementById("btnI").style.display = 'none';
@@ -433,10 +374,62 @@ function reproducirAudio() {
   audio.play();
 }
 
-// Llama a la función para reproducir el audio cuando la página se haya cargado completamente
 window.addEventListener('load', reproducirAudio);
+// Llama a la función para reproducir el audio cuando la página se haya cargado completamente
 
 
+function limpiarYDibujarAutomata(automata) {
 
+  // Limpiar el canvas
+  canvas.model.clear();
+  nodesView.length = 0;
+  nodes.length = 0;
+  linksView.length = 0;
+  links.length = 0;
 
+  // Dibujar los nodos
+  const states = automata.states;
+
+  for (let i = 0; i < states.length; i++) {
+    const x = 100 + i * 150;
+    const y = 100 + i * 50;
+
+    const state = ""
+    if(automata.finalStates.includes(state)){
+      if(automata.startState == state){
+        state = 'inicial y final';
+      }
+      else{
+        state = 'final';
+      }
+    }
+    else if(automata.startState == state){
+      state = 'inicial';
+    }
+
+    const node = createNode(x, y, states[i], state);
+    nodesView.push(node);
+
+    canvas.model.addCell(node);
+  }
+
+  // Dibujar las transiciones
+  const transitions = automata.transitions;
+  console.log(transitions);
+  for (const transition in transitions) {
+    
+    const stateTransitions = transitions[transition];
+    console.log(stateTransitions);
+    for (const symbol in stateTransitions) {
+      const toState = stateTransitions[symbol];
+
+      const fromNode = nodesView.find(n => n.attributes.attrs.text.text === transition);
+      const toNode = nodesView.find(n => n.attributes.attrs.text.text === toState);
+
+      const link = createLink(fromNode.id, toNode.id, symbol);
+      linksView.push(link);
+      canvas.model.addCell(link);
+    }
+  }
+}
 
