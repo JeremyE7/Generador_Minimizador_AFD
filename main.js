@@ -231,7 +231,7 @@ canvas.on('element:contextmenu', function (cellView, evt) {
     canvas.model.removeCells([node]);
     nodes.splice(nodesView.indexOf(node), 1);
     nodesView.splice(nodesView.indexOf(node), 1);
-    
+
   }
   console.log(nodes);
 });
@@ -313,26 +313,26 @@ function minimizar() {
   }
   //Obtener nodo inicial
   const startState = nodes.find(n => n.estado === "inicial" || n.estado === "inicial y final").label;
-  automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState , finales.map(n => n.label));
+  automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState, finales.map(n => n.label));
   console.log("a continuacion automata y enviandolo a python");
   console.log(JSON.stringify(automata));
   fetch('http://127.0.0.1:5000/minimize', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(automata)
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log("A continuación, los datos:");
-    console.log(data);
-    automata = data;
-    limpiarYDibujarAutomata(automata);
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(automata)
   })
-  .catch(error => {
-    console.error('Error en la solicitud:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      console.log("A continuación, los datos:");
+      console.log(data);
+      automata = data;
+      limpiarYDibujarAutomata(automata);
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
 }
 
 function minimizeDFA(states, alphabet, transitions, startState, finalStates) {
@@ -392,24 +392,24 @@ function limpiarYDibujarAutomata(automata) {
 
   for (let i = 0; i < states.length; i++) {
     const x = 100 + i * 150;
-    const y = 100 + i * 50;
+    const y = 100 + i * 100;
 
     let state = ""
-    if(automata.finalStates.includes(states[i])){
-      if(automata.startState == states[i]){
+    if (automata.finalStates.includes(states[i])) {
+      if (automata.startState == states[i]) {
         state = 'inicial y final';
         console.log("inicio y final");
       }
-      else{
+      else {
         state = 'final';
         console.log("final");
       }
     }
-    else if(automata.startState == states[i]){
+    else if (automata.startState == states[i]) {
       state = 'inicial';
       console.log("inicial");
     }
-    else{
+    else {
       state = 'normal';
       console.log("normal");
     }
@@ -424,7 +424,7 @@ function limpiarYDibujarAutomata(automata) {
   const transitions = automata.transitions;
   console.log(transitions);
   for (const transition in transitions) {
-    
+
     const stateTransitions = transitions[transition];
     console.log(stateTransitions);
     for (const symbol in stateTransitions) {
@@ -433,9 +433,20 @@ function limpiarYDibujarAutomata(automata) {
       const fromNode = nodesView.find(n => n.attributes.attrs.text.text === transition);
       const toNode = nodesView.find(n => n.attributes.attrs.text.text === toState);
 
-      const link = createLink(fromNode.id, toNode.id, symbol);
-      linksView.push(link);
-      canvas.model.addCell(link);
+      const existingLink = canvas.model.getConnectedLinks(fromNode, { outbound: true })
+        .find(link => link.getTargetCell() === toNode);
+
+      if (existingLink) {
+        // Actualizar el label del enlace existente
+        const existingLabels = existingLink.prop('labels');
+        const updatedLabel = existingLabels.length > 0 ? `${existingLabels[0].attrs.text.text}, ${symbol}` : symbol;
+        existingLink.prop('labels', [{ attrs: { text: { text: updatedLabel } } }]);
+      } else {
+        // Crear un nuevo enlace
+        const newLink = createLink(fromNode.id, toNode.id, symbol);
+        linksView.push(newLink);
+        canvas.model.addCell([toNode, newLink]);
+      }
     }
   }
 }
