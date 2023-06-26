@@ -394,17 +394,24 @@ function limpiarYDibujarAutomata(automata) {
     const x = 100 + i * 150;
     const y = 100 + i * 50;
 
-    const state = ""
-    if(automata.finalStates.includes(state)){
-      if(automata.startState == state){
+    let state = ""
+    if(automata.finalStates.includes(states[i])){
+      if(automata.startState == states[i]){
         state = 'inicial y final';
+        console.log("inicio y final");
       }
       else{
         state = 'final';
+        console.log("final");
       }
     }
-    else if(automata.startState == state){
+    else if(automata.startState == states[i]){
       state = 'inicial';
+      console.log("inicial");
+    }
+    else{
+      state = 'normal';
+      console.log("normal");
     }
 
     const node = createNode(x, y, states[i], state);
