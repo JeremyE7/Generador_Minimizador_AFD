@@ -19,7 +19,7 @@ Click derecho sobre un estado para eliminarlo.
 
 # Descarga y uso
 La mejor forma de descargar este software es mediante docker.
-![imagen](https://www.howtogeek.com/733522/docker-for-beginners-everything-you-need-to-know/)
+![imagen](https://www.cloudsavvyit.com/p/uploads/2021/04/075c8694.jpeg?height=200p&trim=2,2,2,2)
 
 Solo debes clonar el repositorio y en la ubicacion del mismo ejecutar el comando:
 
