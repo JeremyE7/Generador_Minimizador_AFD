@@ -1,9 +1,9 @@
-
+console.log("A")
 // Crear el lienzo para el autómata
 const canvas = new joint.dia.Paper({
   el: $('#canvas'),
-  width: 800,
-  height: 600,
+  width: 700,
+  height: 500,
   gridSize: 1,
   model: new joint.dia.Graph()
 });
@@ -316,7 +316,7 @@ function minimizar() {
   automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState, finales.map(n => n.label));
   console.log("a continuacion automata y enviandolo a python");
   console.log(JSON.stringify(automata));
-  fetch('http://127.0.0.1:5000/minimize', {
+  fetch('http://172.18.0.2:5000/minimize', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

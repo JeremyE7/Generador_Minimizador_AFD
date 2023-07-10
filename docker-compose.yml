@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: DockerfileApi
+    command: python app.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    networks:
+      - automat
+  web:
+    build: 
+      context: .
+      dockerfile: DockerfileWeb
+    command: npm run dev -- --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+    networks:
+      - automat
+    depends_on:
+      - backend
+networks:
+  automat:
+
