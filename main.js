@@ -316,7 +316,7 @@ function minimizar() {
   automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState, finales.map(n => n.label));
   console.log("a continuacion automatas y enviandolo a python");
   console.log(JSON.stringify(automata));
-  fetch('http://172.18.0.2:5000/minimize', {
+  fetch('http://localhost:5000/minimize', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
