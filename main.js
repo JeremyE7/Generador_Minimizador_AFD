@@ -314,7 +314,7 @@ function minimizar() {
   //Obtener nodo inicial
   const startState = nodes.find(n => n.estado === "inicial" || n.estado === "inicial y final").label;
   automata = minimizeDFA(nodes.map(n => n.label), alphabet, transitions, startState, finales.map(n => n.label));
-  console.log("a continuacion automata y enviandolo a python");
+  console.log("a continuacion automatas y enviandolo a python");
   console.log(JSON.stringify(automata));
   fetch('http://172.18.0.2:5000/minimize', {
     method: 'POST',

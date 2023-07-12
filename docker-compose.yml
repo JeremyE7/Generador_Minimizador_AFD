@@ -11,7 +11,9 @@ services:
     volumes:
       - .:/app
     networks:
-      - automat
+      automat:
+        ipv4_address: 172.18.0.2
+
   web:
     build: 
       context: .
@@ -28,4 +30,8 @@ services:
       - backend
 networks:
   automat:
-
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/24
