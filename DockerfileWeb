@@ -2,8 +2,8 @@ FROM node:14
 
 WORKDIR /app
 
-COPY package.json /app/
-RUN npm install --save-dev vite
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
-COPY . /app/
+COPY . .
